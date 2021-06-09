@@ -1,0 +1,2186 @@
+---
+title: "sulfur"
+author: "Michael Liou"
+date: "12/21/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(skimr)
+```
+
+```{r}
+#dat <- read.csv("/Users/elisescowley2/Documents/AnantharamanLab/CRC/20200918_HMM_Search_Results_Master.csv")
+dat <- read.csv("/Users/elisescowley2/Documents/AnantharamanLab/CRC/20210517_HMMSummary.csv")
+#skim(dat)
+colnames(dat)
+```
+
+
+
+```{r asrA-orig}
+#dat_asrA <- dat %>% select(genome_name,sample_name, sgb_id, asrA, Disease_Summary)
+
+# Recode disease summary and gene presense
+#dat_asrA$asrA <- as.numeric(dat_asrA$asrA) - 1
+#dat_asrA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_asrA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+
+
+#  binarizeds patient gene presence
+#binarized_asrA <- prop_patient_asrA %>% 
+ # select(sample_name, DiseaseBinarized, patient_has_asrA)
+
+# Change to data matrix for chisq test.
+#mat_asrA <- binarized_asrA %>% count(DiseaseBinarized,patient_has_asrA) %>% pivot_wider(names_from = "patient_has_asrA", values_from = "n") %>% 
+ # data.matrix()
+#mat_asrA
+
+# the data
+# mat_asrA[,c(2,3)]
+
+# chisq test of independence
+#chisq.test(mat_asrA[,c(2, 3)])
+
+#?p.adjust # "BH" common in biological in which you're doing a lot of testing. controlling for false discovery rate
+# bonferroni is very conservative, results in dividing the p-value cutoff by # of tests you do.
+```
+
+
+```{r dsrA}
+dat_dsrA <- dat %>% select(genome_name,sample_name, sgb_id, dsrA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrA$dsrA <- as.numeric(dat_dsrA$dsrA) - 1
+dat_dsrA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrA <- dat_dsrA %>% 
+  count(sample_name, dsrA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrA", values_from = "n") %>% 
+  mutate(patient_has_dsrA = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrA <- prop_patient_dsrA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrA)
+
+# Change to data matrix for chisq test.
+mat_dsrA <- binarized_dsrA %>% count(DiseaseBinarized,patient_has_dsrA) %>% pivot_wider(names_from = "patient_has_dsrA", values_from = "n") %>% 
+  data.matrix()
+mat_dsrA
+
+# the data
+# mat_dsrA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrA[,c(2, 3)])
+```
+
+```{r dsrB}
+dat_dsrB <- dat %>% select(genome_name,sample_name, sgb_id, dsrB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrB$dsrB <- as.numeric(dat_dsrB$dsrB) - 1
+dat_dsrB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrB <- dat_dsrB %>% 
+  count(sample_name, dsrB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrB", values_from = "n") %>% 
+  mutate(patient_has_dsrB = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrB <- prop_patient_dsrB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrB)
+
+# Change to data matrix for chisq test.
+mat_dsrB <- binarized_dsrB %>% count(DiseaseBinarized,patient_has_dsrB) %>% pivot_wider(names_from = "patient_has_dsrB", values_from = "n") %>% 
+  data.matrix()
+mat_dsrB
+
+# the data
+# mat_dsrB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrB[,c(2, 3)])
+```
+
+
+```{r dsrC}
+dat_dsrC <- dat %>% select(genome_name,sample_name, sgb_id, dsrC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrC$dsrC <- as.numeric(dat_dsrC$dsrC) - 1
+dat_dsrC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrC <- dat_dsrC %>% 
+  count(sample_name, dsrC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrC", values_from = "n") %>% 
+  mutate(patient_has_dsrC = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrC <- prop_patient_dsrC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrC)
+
+# Change to data matrix for chisq test.
+mat_dsrC <- binarized_dsrC %>% count(DiseaseBinarized,patient_has_dsrC) %>% pivot_wider(names_from = "patient_has_dsrC", values_from = "n") %>% 
+  data.matrix()
+mat_dsrC
+
+# the data
+# mat_dsrC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrC[,c(2, 3)])
+```
+
+```{r dsrC_2}
+dat_dsrC <- dat %>% select(genome_name,sample_name, sgb_id, dsrC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrC$dsrC <- as.numeric(dat_dsrC$dsrC) - 1
+dat_dsrC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrC <- dat_dsrC %>% 
+  count(sample_name, dsrC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrC", values_from = "n") %>% 
+  mutate(patient_has_dsrC = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrC <- prop_patient_dsrC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrC)
+
+# Change to data matrix for chisq test.
+mat_dsrC <- binarized_dsrC %>% count(DiseaseBinarized,patient_has_dsrC) %>% pivot_wider(names_from = "patient_has_dsrC", values_from = "n") %>% 
+  data.matrix()
+mat_dsrC
+
+# the data
+# mat_dsrC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrC[,c(2, 3)])
+```
+
+
+
+```{r dsrD}
+dat_dsrD <- dat %>% select(genome_name,sample_name, sgb_id, dsrD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrD$dsrD <- as.numeric(dat_dsrD$dsrD) - 1
+dat_dsrD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrD <- dat_dsrD %>% 
+  count(sample_name, dsrD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrD", values_from = "n") %>% 
+  mutate(patient_has_dsrD = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrD <- prop_patient_dsrD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrD)
+
+# Change to data matrix for chisq test.
+mat_dsrD <- binarized_dsrD %>% count(DiseaseBinarized,patient_has_dsrD) %>% pivot_wider(names_from = "patient_has_dsrD", values_from = "n") %>% 
+  data.matrix()
+mat_dsrD
+
+# the data
+# mat_dsrD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrD[,c(2, 3)])
+```
+
+
+```{r dsrJ}
+dat_dsrJ <- dat %>% select(genome_name,sample_name, sgb_id, dsrJ, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrJ$dsrJ <- as.numeric(dat_dsrJ$dsrJ) - 1
+dat_dsrJ$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrJ$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrJ <- dat_dsrJ %>% 
+  count(sample_name, dsrJ, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrJ", values_from = "n") %>% 
+  mutate(patient_has_dsrJ = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrJ <- prop_patient_dsrJ %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrJ)
+
+# Change to data matrix for chisq test.
+mat_dsrJ <- binarized_dsrJ %>% count(DiseaseBinarized,patient_has_dsrJ) %>% pivot_wider(names_from = "patient_has_dsrJ", values_from = "n") %>% 
+  data.matrix()
+mat_dsrJ
+
+# the data
+# mat_dsrJ[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrJ[,c(2, 3)])
+```
+
+
+```{r dsrK}
+dat_dsrK <- dat %>% select(genome_name,sample_name, sgb_id, dsrK, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrK$dsrK <- as.numeric(dat_dsrK$dsrK) - 1
+dat_dsrK$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrK$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrK <- dat_dsrK %>% 
+  count(sample_name, dsrK, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrK", values_from = "n") %>% 
+  mutate(patient_has_dsrK = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrK <- prop_patient_dsrK %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrK)
+
+# Change to data matrix for chisq test.
+mat_dsrK <- binarized_dsrK %>% count(DiseaseBinarized,patient_has_dsrK) %>% pivot_wider(names_from = "patient_has_dsrK", values_from = "n") %>% 
+  data.matrix()
+mat_dsrK
+
+# the data
+# mat_dsrK[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrK[,c(2, 3)])
+```
+
+
+```{r dsrM}
+dat_dsrM <- dat %>% select(genome_name,sample_name, sgb_id, dsrM, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrM$dsrM <- as.numeric(dat_dsrM$dsrM) - 1
+dat_dsrM$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrM$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrM <- dat_dsrM %>% 
+  count(sample_name, dsrM, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrM", values_from = "n") %>% 
+  mutate(patient_has_dsrM = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrM <- prop_patient_dsrM %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrM)
+
+# Change to data matrix for chisq test.
+mat_dsrM <- binarized_dsrM %>% count(DiseaseBinarized,patient_has_dsrM) %>% pivot_wider(names_from = "patient_has_dsrM", values_from = "n") %>% 
+  data.matrix()
+mat_dsrM
+
+# the data
+# mat_dsrM[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrM[,c(2, 3)])
+```
+
+
+```{r dsrO}
+dat_dsrO <- dat %>% select(genome_name,sample_name, sgb_id, dsrO, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrO$dsrO <- as.numeric(dat_dsrO$dsrO) - 1
+dat_dsrO$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrO$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrO <- dat_dsrO %>% 
+  count(sample_name, dsrO, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrO", values_from = "n") %>% 
+  mutate(patient_has_dsrO = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrO <- prop_patient_dsrO %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrO)
+
+# Change to data matrix for chisq test.
+mat_dsrO <- binarized_dsrO %>% count(DiseaseBinarized,patient_has_dsrO) %>% pivot_wider(names_from = "patient_has_dsrO", values_from = "n") %>% 
+  data.matrix()
+mat_dsrO
+
+# the data
+# mat_dsrO[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrO[,c(2, 3)])
+```
+
+
+
+```{r dsrP}
+dat_dsrP <- dat %>% select(genome_name,sample_name, sgb_id, dsrP, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrP$dsrP <- as.numeric(dat_dsrP$dsrP) - 1
+dat_dsrP$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrP$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrP <- dat_dsrP %>% 
+  count(sample_name, dsrP, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrP", values_from = "n") %>% 
+  mutate(patient_has_dsrP = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrP <- prop_patient_dsrP %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrP)
+
+# Change to data matrix for chisq test.
+mat_dsrP <- binarized_dsrP %>% count(DiseaseBinarized,patient_has_dsrP) %>% pivot_wider(names_from = "patient_has_dsrP", values_from = "n") %>% 
+  data.matrix()
+mat_dsrP
+
+# the data
+# mat_dsrP[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrP[,c(2, 3)])
+```
+
+
+```{r dsrT}
+dat_dsrT <- dat %>% select(genome_name,sample_name, sgb_id, dsrT, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dsrT$dsrT <- as.numeric(dat_dsrT$dsrT) - 1
+dat_dsrT$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dsrT$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dsrT <- dat_dsrT %>% 
+  count(sample_name, dsrT, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dsrT", values_from = "n") %>% 
+  mutate(patient_has_dsrT = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_dsrT <- prop_patient_dsrT %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dsrT)
+
+# Change to data matrix for chisq test.
+mat_dsrT <- binarized_dsrT %>% count(DiseaseBinarized,patient_has_dsrT) %>% pivot_wider(names_from = "patient_has_dsrT", values_from = "n") %>% 
+  data.matrix()
+mat_dsrT
+
+# the data
+# mat_dsrT[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dsrT[,c(2, 3)])
+```
+
+
+```{r asrA}
+dat_asrA <- dat %>% select(genome_name,sample_name, sgb_id, asrA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_asrA$asrA <- as.numeric(dat_asrA$asrA) - 1
+dat_asrA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_asrA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_asrA <- dat_asrA %>% 
+  count(sample_name, asrA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "asrA", values_from = "n") %>% 
+  mutate(patient_has_asrA = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_asrA <- prop_patient_asrA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_asrA)
+
+# Change to data matrix for chisq test.
+mat_asrA <- binarized_asrA %>% count(DiseaseBinarized,patient_has_asrA) %>% pivot_wider(names_from = "patient_has_asrA", values_from = "n") %>% 
+  data.matrix()
+mat_asrA
+
+# the data
+# mat_asrA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_asrA[,c(2, 3)])
+```
+
+```{r asrB}
+dat_asrB <- dat %>% select(genome_name,sample_name, sgb_id, asrB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_asrB$asrB <- as.numeric(dat_asrB$asrB) - 1
+dat_asrB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_asrB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_asrB <- dat_asrB %>% 
+  count(sample_name, asrB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "asrB", values_from = "n") %>% 
+  mutate(patient_has_asrB = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_asrB <- prop_patient_asrB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_asrB)
+
+# Change to data matrix for chisq test.
+mat_asrB <- binarized_asrB %>% count(DiseaseBinarized,patient_has_asrB) %>% pivot_wider(names_from = "patient_has_asrB", values_from = "n") %>% 
+  data.matrix()
+mat_asrB
+
+# the data
+# mat_asrB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_asrB[,c(2, 3)])
+```
+
+
+```{r asrC}
+dat_asrC <- dat %>% select(genome_name,sample_name, sgb_id, asrC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_asrC$asrC <- as.numeric(dat_asrC$asrC) - 1
+dat_asrC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_asrC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_asrC <- dat_asrC %>% 
+  count(sample_name, asrC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "asrC", values_from = "n") %>% 
+  mutate(patient_has_asrC = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_asrC <- prop_patient_asrC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_asrC)
+
+# Change to data matrix for chisq test.
+mat_asrC <- binarized_asrC %>% count(DiseaseBinarized,patient_has_asrC) %>% pivot_wider(names_from = "patient_has_asrC", values_from = "n") %>% 
+  data.matrix()
+mat_asrC
+
+# the data
+# mat_asrC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_asrC[,c(2, 3)])
+```
+
+
+```{r phsA}
+dat_phsA <- dat %>% select(genome_name,sample_name, sgb_id, phsA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_phsA$phsA <- as.numeric(dat_phsA$phsA) - 1
+dat_phsA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_phsA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_phsA <- dat_phsA %>% 
+  count(sample_name, phsA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "phsA", values_from = "n") %>% 
+  mutate(patient_has_phsA = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_phsA <- prop_patient_phsA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_phsA)
+
+# Change to data matrix for chisq test.
+mat_phsA <- binarized_phsA %>% count(DiseaseBinarized,patient_has_phsA) %>% pivot_wider(names_from = "patient_has_phsA", values_from = "n") %>% 
+  data.matrix()
+mat_phsA
+
+# the data
+# mat_phsA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_phsA[,c(2, 3)])
+```
+
+
+```{r phsA_K08352}
+dat_phsA_K08352 <- dat %>% select(genome_name,sample_name, sgb_id, phsA_K08352, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_phsA_K08352$phsA_K08352 <- as.numeric(dat_phsA_K08352$phsA_K08352) - 1
+dat_phsA_K08352$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_phsA_K08352$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_phsA_K08352 <- dat_phsA_K08352 %>% 
+  count(sample_name, phsA_K08352, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "phsA_K08352", values_from = "n") %>% 
+  mutate(patient_has_phsA_K08352 = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_phsA_K08352 <- prop_patient_phsA_K08352 %>% 
+  select(sample_name, DiseaseBinarized, patient_has_phsA_K08352)
+
+# Change to data matrix for chisq test.
+mat_phsA_K08352 <- binarized_phsA_K08352 %>% count(DiseaseBinarized,patient_has_phsA_K08352) %>% pivot_wider(names_from = "patient_has_phsA_K08352", values_from = "n") %>% 
+  data.matrix()
+mat_phsA_K08352
+
+# the data
+# mat_phsA_K08352[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_phsA_K08352[,c(2, 3)])
+```
+
+
+```{r phsC}
+dat_phsC <- dat %>% select(genome_name,sample_name, sgb_id, phsC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_phsC$phsC <- as.numeric(dat_phsC$phsC) - 1
+dat_phsC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_phsC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_phsC <- dat_phsC %>% 
+  count(sample_name, phsC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "phsC", values_from = "n") %>% 
+  mutate(patient_has_phsC = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_phsC <- prop_patient_phsC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_phsC)
+
+# Change to data matrix for chisq test.
+mat_phsC <- binarized_phsC %>% count(DiseaseBinarized,patient_has_phsC) %>% pivot_wider(names_from = "patient_has_phsC", values_from = "n") %>% 
+  data.matrix()
+mat_phsC
+
+# the data
+# mat_phsC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_phsC[,c(2, 3)])
+```
+
+
+```{r sdo}
+dat_sdo <- dat %>% select(genome_name,sample_name, sgb_id, sdo, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_sdo$sdo <- as.numeric(dat_sdo$sdo) - 1
+dat_sdo$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_sdo$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_sdo <- dat_sdo %>% 
+  count(sample_name, sdo, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "sdo", values_from = "n") %>% 
+  mutate(patient_has_sdo = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_sdo <- prop_patient_sdo %>% 
+  select(sample_name, DiseaseBinarized, patient_has_sdo)
+
+# Change to data matrix for chisq test.
+mat_sdo <- binarized_sdo %>% count(DiseaseBinarized,patient_has_sdo) %>% pivot_wider(names_from = "patient_has_sdo", values_from = "n") %>% 
+  data.matrix()
+mat_sdo
+
+# the data
+# mat_sdo[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_sdo[,c(2, 3)])
+```
+
+
+```{r sqr}
+dat_sqr <- dat %>% select(genome_name,sample_name, sgb_id, sqr, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_sqr$sqr <- as.numeric(dat_sqr$sqr) - 1
+dat_sqr$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_sqr$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_sqr <- dat_sqr %>% 
+  count(sample_name, sqr, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "sqr", values_from = "n") %>% 
+  mutate(patient_has_sqr = !is.na(`1`))
+
+#  binarizeds patient gene presence
+binarized_sqr <- prop_patient_sqr %>% 
+  select(sample_name, DiseaseBinarized, patient_has_sqr)
+
+# Change to data matrix for chisq test.
+mat_sqr <- binarized_sqr %>% count(DiseaseBinarized,patient_has_sqr) %>% pivot_wider(names_from = "patient_has_sqr", values_from = "n") %>% 
+  data.matrix()
+mat_sqr
+
+# the data
+# mat_sqr[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_sqr[,c(2, 3)])
+```
+
+
+```{r tpa}
+dat_tpa <- dat %>% select(genome_name,sample_name, sgb_id, tpa, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_tpa$tpa <- as.numeric(dat_tpa$tpa) - 1
+dat_tpa$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_tpa$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_tpa <- dat_tpa %>% 
+  count(sample_name, tpa, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "tpa", values_from = "n") %>% 
+  mutate(patient_has_tpa = !is.na(`1`))
+prop_patient_tpa
+
+#  binarizeds patient gene presence
+binarized_tpa <- prop_patient_tpa %>% 
+  select(sample_name, DiseaseBinarized, patient_has_tpa)
+
+# Change to data matrix for chisq test.
+mat_tpa <- binarized_tpa %>% count(DiseaseBinarized,patient_has_tpa) %>% pivot_wider(names_from = "patient_has_tpa", values_from = "n") %>% 
+  data.matrix()
+mat_tpa
+
+# the data
+# mat_tpa[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_tpa[,c(2, 3)])
+```
+
+```{r dcyD}
+dat_dcyD <- dat %>% select(genome_name,sample_name, sgb_id, dcyD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dcyD$dcyD <- as.numeric(dat_dcyD$dcyD) - 1
+dat_dcyD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dcyD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dcyD <- dat_dcyD %>% 
+  count(sample_name, dcyD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dcyD", values_from = "n") %>% 
+  mutate(patient_has_dcyD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dcyD <- prop_patient_dcyD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dcyD)
+
+# Change to data matrix for chisq test.
+mat_dcyD <- binarized_dcyD %>% count(DiseaseBinarized,patient_has_dcyD) %>% pivot_wider(names_from = "patient_has_dcyD", values_from = "n") %>% 
+  data.matrix()
+mat_dcyD
+
+# the data
+# mat_dcyD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dcyD[,c(2, 3)])
+```
+
+
+```{r sufS}
+dat_sufS <- dat %>% select(genome_name,sample_name, sgb_id, sufS, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_sufS$sufS <- as.numeric(dat_sufS$sufS) - 1
+dat_sufS$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_sufS$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_sufS <- dat_sufS %>% 
+  count(sample_name, sufS, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "sufS", values_from = "n") %>% 
+  mutate(patient_has_sufS = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_sufS <- prop_patient_sufS %>% 
+  select(sample_name, DiseaseBinarized, patient_has_sufS)
+
+# Change to data matrix for chisq test.
+mat_sufS <- binarized_sufS %>% count(DiseaseBinarized,patient_has_sufS) %>% pivot_wider(names_from = "patient_has_sufS", values_from = "n") %>% 
+  data.matrix()
+mat_sufS
+
+# the data
+# mat_sufS[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_sufS[,c(2, 3)])
+```
+
+
+```{r metC}
+dat_metC <- dat %>% select(genome_name,sample_name, sgb_id, metC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_metC$metC <- as.numeric(dat_metC$metC) - 1
+dat_metC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_metC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_metC <- dat_metC %>% 
+  count(sample_name, metC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "metC", values_from = "n") %>% 
+  mutate(patient_has_metC = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_metC <- prop_patient_metC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_metC)
+
+# Change to data matrix for chisq test.
+mat_metC <- binarized_metC %>% count(DiseaseBinarized,patient_has_metC) %>% pivot_wider(names_from = "patient_has_metC", values_from = "n") %>% 
+  data.matrix()
+mat_metC
+
+# the data
+# mat_metC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_metC[,c(2, 3)])
+```
+
+
+```{r cysM}
+dat_cysM <- dat %>% select(genome_name,sample_name, sgb_id, cysM, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_cysM$cysM <- as.numeric(dat_cysM$cysM) - 1
+dat_cysM$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_cysM$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_cysM <- dat_cysM %>% 
+  count(sample_name, cysM, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "cysM", values_from = "n") %>% 
+  mutate(patient_has_cysM = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_cysM <- prop_patient_cysM %>% 
+  select(sample_name, DiseaseBinarized, patient_has_cysM)
+
+# Change to data matrix for chisq test.
+mat_cysM <- binarized_cysM %>% count(DiseaseBinarized,patient_has_cysM) %>% pivot_wider(names_from = "patient_has_cysM", values_from = "n") %>% 
+  data.matrix()
+mat_cysM
+
+# the data
+# mat_cysM[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_cysM[,c(2, 3)])
+```
+
+
+
+
+```{r cysK}
+dat_cysK <- dat %>% select(genome_name,sample_name, sgb_id, cysK, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_cysK$cysK <- as.numeric(dat_cysK$cysK) - 1
+dat_cysK$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_cysK$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_cysK <- dat_cysK %>% 
+  count(sample_name, cysK, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "cysK", values_from = "n") %>% 
+  mutate(patient_has_cysK = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_cysK <- prop_patient_cysK %>% 
+  select(sample_name, DiseaseBinarized, patient_has_cysK)
+
+# Change to data matrix for chisq test.
+mat_cysK <- binarized_cysK %>% count(DiseaseBinarized,patient_has_cysK) %>% pivot_wider(names_from = "patient_has_cysK", values_from = "n") %>% 
+  data.matrix()
+mat_cysK
+
+# the data
+# mat_cysK[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_cysK[,c(2, 3)])
+```
+
+
+
+
+```{r tauD}
+dat_tauD <- dat %>% select(genome_name,sample_name, sgb_id, tauD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_tauD$tauD <- as.numeric(dat_tauD$tauD) - 1
+dat_tauD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_tauD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_tauD <- dat_tauD %>% 
+  count(sample_name, tauD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "tauD", values_from = "n") %>% 
+  mutate(patient_has_tauD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_tauD <- prop_patient_tauD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_tauD)
+
+# Change to data matrix for chisq test.
+mat_tauD <- binarized_tauD %>% count(DiseaseBinarized,patient_has_tauD) %>% pivot_wider(names_from = "patient_has_tauD", values_from = "n") %>% 
+  data.matrix()
+mat_tauD
+
+# the data
+# mat_tauD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_tauD[,c(2, 3)])
+```
+
+
+
+```{r xsc}
+dat_xsc <- dat %>% select(genome_name,sample_name, sgb_id, xsc, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_xsc$xsc <- as.numeric(dat_xsc$xsc) - 1
+dat_xsc$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_xsc$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_xsc <- dat_xsc %>% 
+  count(sample_name, xsc, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "xsc", values_from = "n") %>% 
+  mutate(patient_has_xsc = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_xsc <- prop_patient_xsc %>% 
+  select(sample_name, DiseaseBinarized, patient_has_xsc)
+
+# Change to data matrix for chisq test.
+mat_xsc <- binarized_xsc %>% count(DiseaseBinarized,patient_has_xsc) %>% pivot_wider(names_from = "patient_has_xsc", values_from = "n") %>% 
+  data.matrix()
+mat_xsc
+
+# the data
+# mat_xsc[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_xsc[,c(2, 3)])
+```
+
+
+
+```{r malY}
+dat_malY <- dat %>% select(genome_name,sample_name, sgb_id, malY, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_malY$malY <- as.numeric(dat_malY$malY) - 1
+dat_malY$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_malY$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_malY <- dat_malY %>% 
+  count(sample_name, malY, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "malY", values_from = "n") %>% 
+  mutate(patient_has_malY = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_malY <- prop_patient_malY %>% 
+  select(sample_name, DiseaseBinarized, patient_has_malY)
+
+# Change to data matrix for chisq test.
+mat_malY <- binarized_malY %>% count(DiseaseBinarized,patient_has_malY) %>% pivot_wider(names_from = "patient_has_malY", values_from = "n") %>% 
+  data.matrix()
+mat_malY
+
+# the data
+# mat_malY[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_malY[,c(2, 3)])
+```
+
+
+```{r toa}
+dat_toa <- dat %>% select(genome_name,sample_name, sgb_id, toa, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_toa$toa <- as.numeric(dat_toa$toa) - 1
+dat_toa$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_toa$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_toa <- dat_toa %>% 
+  count(sample_name, toa, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "toa", values_from = "n") %>% 
+  mutate(patient_has_toa = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_toa <- prop_patient_toa %>% 
+  select(sample_name, DiseaseBinarized, patient_has_toa)
+
+# Change to data matrix for chisq test.
+mat_toa <- binarized_toa %>% count(DiseaseBinarized,patient_has_toa) %>% pivot_wider(names_from = "patient_has_toa", values_from = "n") %>% 
+  data.matrix()
+mat_toa
+
+# the data
+# mat_toa[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_toa[,c(2, 3)])
+```
+
+
+```{r SufS}
+dat_SufS <- dat %>% select(genome_name,sample_name, sgb_id, SufS, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_SufS$SufS <- as.numeric(dat_SufS$SufS) - 1
+dat_SufS$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_SufS$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_SufS <- dat_SufS %>% 
+  count(sample_name, SufS, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "SufS", values_from = "n") %>% 
+  mutate(patient_has_SufS = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_SufS <- prop_patient_SufS %>% 
+  select(sample_name, DiseaseBinarized, patient_has_SufS)
+
+# Change to data matrix for chisq test.
+mat_SufS <- binarized_SufS %>% count(DiseaseBinarized,patient_has_SufS) %>% pivot_wider(names_from = "patient_has_SufS", values_from = "n") %>% 
+  data.matrix()
+mat_SufS
+
+# the data
+# mat_SufS[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_SufS[,c(2, 3)])
+```
+
+
+
+```{r isfD}
+dat_isfD <- dat %>% select(genome_name,sample_name, sgb_id, isfD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_isfD$isfD <- as.numeric(dat_isfD$isfD) - 1
+dat_isfD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_isfD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_isfD <- dat_isfD %>% 
+  count(sample_name, isfD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "isfD", values_from = "n") %>% 
+  mutate(patient_has_isfD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_isfD <- prop_patient_isfD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_isfD)
+
+# Change to data matrix for chisq test.
+mat_isfD <- binarized_isfD %>% count(DiseaseBinarized,patient_has_isfD) %>% pivot_wider(names_from = "patient_has_isfD", values_from = "n") %>% 
+  data.matrix()
+mat_isfD
+
+# the data
+# mat_isfD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_isfD[,c(2, 3)])
+```
+
+
+
+```{r mgl}
+dat_mgl <- dat %>% select(genome_name,sample_name, sgb_id, mgl, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_mgl$mgl <- as.numeric(dat_mgl$mgl) - 1
+dat_mgl$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_mgl$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_mgl <- dat_mgl %>% 
+  count(sample_name, mgl, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "mgl", values_from = "n") %>% 
+  mutate(patient_has_mgl = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_mgl <- prop_patient_mgl %>% 
+  select(sample_name, DiseaseBinarized, patient_has_mgl)
+
+# Change to data matrix for chisq test.
+mat_mgl <- binarized_mgl %>% count(DiseaseBinarized,patient_has_mgl) %>% pivot_wider(names_from = "patient_has_mgl", values_from = "n") %>% 
+  data.matrix()
+mat_mgl
+
+# the data
+# mat_mgl[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_mgl[,c(2, 3)])
+```
+
+
+```{r ttrA}
+dat_ttrA <- dat %>% select(genome_name,sample_name, sgb_id, ttrA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ttrA$ttrA <- as.numeric(dat_ttrA$ttrA) - 1
+dat_ttrA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ttrA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ttrA <- dat_ttrA %>% 
+  count(sample_name, ttrA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ttrA", values_from = "n") %>% 
+  mutate(patient_has_ttrA = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ttrA <- prop_patient_ttrA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ttrA)
+
+# Change to data matrix for chisq test.
+mat_ttrA <- binarized_ttrA %>% count(DiseaseBinarized,patient_has_ttrA) %>% pivot_wider(names_from = "patient_has_ttrA", values_from = "n") %>% 
+  data.matrix()
+mat_ttrA
+
+# the data
+# mat_ttrA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ttrA[,c(2, 3)])
+```
+
+
+```{r ttrB}
+dat_ttrB <- dat %>% select(genome_name,sample_name, sgb_id, ttrB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ttrB$ttrB <- as.numeric(dat_ttrB$ttrB) - 1
+dat_ttrB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ttrB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ttrB <- dat_ttrB %>% 
+  count(sample_name, ttrB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ttrB", values_from = "n") %>% 
+  mutate(patient_has_ttrB = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ttrB <- prop_patient_ttrB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ttrB)
+
+# Change to data matrix for chisq test.
+mat_ttrB <- binarized_ttrB %>% count(DiseaseBinarized,patient_has_ttrB) %>% pivot_wider(names_from = "patient_has_ttrB", values_from = "n") %>% 
+  data.matrix()
+mat_ttrB
+
+# the data
+# mat_ttrB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ttrB[,c(2, 3)])
+```
+
+
+```{r ttrC}
+dat_ttrC <- dat %>% select(genome_name,sample_name, sgb_id, ttrC, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ttrC$ttrC <- as.numeric(dat_ttrC$ttrC) - 1
+dat_ttrC$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ttrC$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ttrC <- dat_ttrC %>% 
+  count(sample_name, ttrC, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ttrC", values_from = "n") %>% 
+  mutate(patient_has_ttrC = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ttrC <- prop_patient_ttrC %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ttrC)
+
+# Change to data matrix for chisq test.
+mat_ttrC <- binarized_ttrC %>% count(DiseaseBinarized,patient_has_ttrC) %>% pivot_wider(names_from = "patient_has_ttrC", values_from = "n") %>% 
+  data.matrix()
+mat_ttrC
+
+# the data
+# mat_ttrC[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ttrC[,c(2, 3)])
+```
+
+```{r dmoA}
+dat_dmoA <- dat %>% select(genome_name,sample_name, sgb_id, dmoA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmoA$dmoA <- as.numeric(dat_dmoA$dmoA) - 1
+dat_dmoA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmoA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmoA <- dat_dmoA %>% 
+  count(sample_name, dmoA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmoA", values_from = "n") %>% 
+  mutate(patient_has_dmoA = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmoA <- prop_patient_dmoA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmoA)
+
+# Change to data matrix for chisq test.
+mat_dmoA <- binarized_dmoA %>% count(DiseaseBinarized,patient_has_dmoA) %>% pivot_wider(names_from = "patient_has_dmoA", values_from = "n") %>% 
+  data.matrix()
+mat_dmoA
+
+# the data
+# mat_dmoA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmoA[,c(2, 3)])
+```
+
+```{r dmsA}
+dat_dmsA <- dat %>% select(genome_name,sample_name, sgb_id, dmsA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsA$dmsA <- as.numeric(dat_dmsA$dmsA) - 1
+dat_dmsA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsA <- dat_dmsA %>% 
+  count(sample_name, dmsA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsA", values_from = "n") %>% 
+  mutate(patient_has_dmsA = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsA <- prop_patient_dmsA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsA)
+
+# Change to data matrix for chisq test.
+mat_dmsA <- binarized_dmsA %>% count(DiseaseBinarized,patient_has_dmsA) %>% pivot_wider(names_from = "patient_has_dmsA", values_from = "n") %>% 
+  data.matrix()
+mat_dmsA
+
+# the data
+# mat_dmsA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsA[,c(2, 3)])
+```
+
+
+```{r dmsB_K00184}
+dat_dmsB_K00184 <- dat %>% select(genome_name,sample_name, sgb_id, dmsB_K00184, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsB_K00184$dmsB_K00184 <- as.numeric(dat_dmsB_K00184$dmsB_K00184) - 1
+dat_dmsB_K00184$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsB_K00184$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsB_K00184 <- dat_dmsB_K00184 %>% 
+  count(sample_name, dmsB_K00184, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsB_K00184", values_from = "n") %>% 
+  mutate(patient_has_dmsB_K00184 = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsB_K00184 <- prop_patient_dmsB_K00184 %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsB_K00184)
+
+# Change to data matrix for chisq test.
+mat_dmsB_K00184 <- binarized_dmsB_K00184 %>% count(DiseaseBinarized,patient_has_dmsB_K00184) %>% pivot_wider(names_from = "patient_has_dmsB_K00184", values_from = "n") %>% 
+  data.matrix()
+mat_dmsB_K00184
+
+# the data
+# mat_dmsB_K00184[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsB_K00184[,c(2, 3)])
+```
+
+```{r dmsB_K07307}
+dat_dmsB_K07307 <- dat %>% select(genome_name,sample_name, sgb_id, dmsB_K07307, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsB_K07307$dmsB_K07307 <- as.numeric(dat_dmsB_K07307$dmsB_K07307) - 1
+dat_dmsB_K07307$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsB_K07307$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsB_K07307 <- dat_dmsB_K07307 %>% 
+  count(sample_name, dmsB_K07307, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsB_K07307", values_from = "n") %>% 
+  mutate(patient_has_dmsB_K07307 = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsB_K07307 <- prop_patient_dmsB_K07307 %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsB_K07307)
+
+# Change to data matrix for chisq test.
+mat_dmsB_K07307 <- binarized_dmsB_K07307 %>% count(DiseaseBinarized,patient_has_dmsB_K07307) %>% pivot_wider(names_from = "patient_has_dmsB_K07307", values_from = "n") %>% 
+  data.matrix()
+mat_dmsB_K07307
+
+# the data
+# mat_dmsB_K07307[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsB_K07307[,c(2, 3)])
+```
+
+
+```{r dmsC_K00185}
+dat_dmsC_K00185 <- dat %>% select(genome_name,sample_name, sgb_id, dmsC_K00185, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsC_K00185$dmsC_K00185 <- as.numeric(dat_dmsC_K00185$dmsC_K00185) - 1
+dat_dmsC_K00185$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsC_K00185$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsC_K00185 <- dat_dmsC_K00185 %>% 
+  count(sample_name, dmsC_K00185, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsC_K00185", values_from = "n") %>% 
+  mutate(patient_has_dmsC_K00185 = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsC_K00185 <- prop_patient_dmsC_K00185 %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsC_K00185)
+
+# Change to data matrix for chisq test.
+mat_dmsC_K00185 <- binarized_dmsC_K00185 %>% count(DiseaseBinarized,patient_has_dmsC_K00185) %>% pivot_wider(names_from = "patient_has_dmsC_K00185", values_from = "n") %>% 
+  data.matrix()
+mat_dmsC_K00185
+
+# the data
+# mat_dmsC_K00185[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsC_K00185[,c(2, 3)])
+```
+
+```{r dmsC_K07308}
+dat_dmsC_K07308 <- dat %>% select(genome_name,sample_name, sgb_id, dmsC_K07308, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsC_K07308$dmsC_K07308 <- as.numeric(dat_dmsC_K07308$dmsC_K07308) - 1
+dat_dmsC_K07308$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsC_K07308$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsC_K07308 <- dat_dmsC_K07308 %>% 
+  count(sample_name, dmsC_K07308, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsC_K07308", values_from = "n") %>% 
+  mutate(patient_has_dmsC_K07308 = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsC_K07308 <- prop_patient_dmsC_K07308 %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsC_K07308)
+
+# Change to data matrix for chisq test.
+mat_dmsC_K07308 <- binarized_dmsC_K07308 %>% count(DiseaseBinarized,patient_has_dmsC_K07308) %>% pivot_wider(names_from = "patient_has_dmsC_K07308", values_from = "n") %>% 
+  data.matrix()
+mat_dmsC_K07308
+
+# the data
+# mat_dmsC_K07308[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsC_K07308[,c(2, 3)])
+```
+
+
+```{r dmsR}
+dat_dmsR <- dat %>% select(genome_name,sample_name, sgb_id, dmsR, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dmsR$dmsR <- as.numeric(dat_dmsR$dmsR) - 1
+dat_dmsR$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dmsR$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dmsR <- dat_dmsR %>% 
+  count(sample_name, dmsR, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dmsR", values_from = "n") %>% 
+  mutate(patient_has_dmsR = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dmsR <- prop_patient_dmsR %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dmsR)
+
+# Change to data matrix for chisq test.
+mat_dmsR <- binarized_dmsR %>% count(DiseaseBinarized,patient_has_dmsR) %>% pivot_wider(names_from = "patient_has_dmsR", values_from = "n") %>% 
+  data.matrix()
+mat_dmsR
+
+# the data
+# mat_dmsR[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dmsR[,c(2, 3)])
+```
+
+
+```{r doxA}
+dat_doxA <- dat %>% select(genome_name,sample_name, sgb_id, doxA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_doxA$doxA <- as.numeric(dat_doxA$doxA) - 1
+dat_doxA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_doxA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_doxA <- dat_doxA %>% 
+  count(sample_name, doxA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "doxA", values_from = "n") %>% 
+  mutate(patient_has_doxA = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_doxA <- prop_patient_doxA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_doxA)
+
+# Change to data matrix for chisq test.
+mat_doxA <- binarized_doxA %>% count(DiseaseBinarized,patient_has_doxA) %>% pivot_wider(names_from = "patient_has_doxA", values_from = "n") %>% 
+  data.matrix()
+mat_doxA
+
+# the data
+# mat_doxA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_doxA[,c(2, 3)])
+```
+
+
+```{r doxD}
+dat_doxD <- dat %>% select(genome_name,sample_name, sgb_id, doxD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_doxD$doxD <- as.numeric(dat_doxD$doxD) - 1
+dat_doxD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_doxD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_doxD <- dat_doxD %>% 
+  count(sample_name, doxD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "doxD", values_from = "n") %>% 
+  mutate(patient_has_doxD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_doxD <- prop_patient_doxD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_doxD)
+
+# Change to data matrix for chisq test.
+mat_doxD <- binarized_doxD %>% count(DiseaseBinarized,patient_has_doxD) %>% pivot_wider(names_from = "patient_has_doxD", values_from = "n") %>% 
+  data.matrix()
+mat_doxD
+
+# the data
+# mat_doxD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_doxD[,c(2, 3)])
+```
+
+
+```{r megL}
+dat_megL <- dat %>% select(genome_name,sample_name, sgb_id, megL, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_megL$megL <- as.numeric(dat_megL$megL) - 1
+dat_megL$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_megL$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_megL <- dat_megL %>% 
+  count(sample_name, megL, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "megL", values_from = "n") %>% 
+  mutate(patient_has_megL = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_megL <- prop_patient_megL %>% 
+  select(sample_name, DiseaseBinarized, patient_has_megL)
+
+# Change to data matrix for chisq test.
+mat_megL <- binarized_megL %>% count(DiseaseBinarized,patient_has_megL) %>% pivot_wider(names_from = "patient_has_megL", values_from = "n") %>% 
+  data.matrix()
+mat_megL
+
+# the data
+# mat_megL[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_megL[,c(2, 3)])
+```
+
+
+
+```{r sfnG}
+dat_sfnG <- dat %>% select(genome_name,sample_name, sgb_id, sfnG, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_sfnG$sfnG <- as.numeric(dat_sfnG$sfnG) - 1
+dat_sfnG$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_sfnG$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_sfnG <- dat_sfnG %>% 
+  count(sample_name, sfnG, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "sfnG", values_from = "n") %>% 
+  mutate(patient_has_sfnG = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_sfnG <- prop_patient_sfnG %>% 
+  select(sample_name, DiseaseBinarized, patient_has_sfnG)
+
+# Change to data matrix for chisq test.
+mat_sfnG <- binarized_sfnG %>% count(DiseaseBinarized,patient_has_sfnG) %>% pivot_wider(names_from = "patient_has_sfnG", values_from = "n") %>% 
+  data.matrix()
+mat_sfnG
+
+# the data
+# mat_sfnG[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_sfnG[,c(2, 3)])
+```
+
+```{r ssuD}
+dat_ssuD <- dat %>% select(genome_name,sample_name, sgb_id, ssuD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ssuD$ssuD <- as.numeric(dat_ssuD$ssuD) - 1
+dat_ssuD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ssuD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ssuD <- dat_ssuD %>% 
+  count(sample_name, ssuD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ssuD", values_from = "n") %>% 
+  mutate(patient_has_ssuD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ssuD <- prop_patient_ssuD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ssuD)
+
+# Change to data matrix for chisq test.
+mat_ssuD <- binarized_ssuD %>% count(DiseaseBinarized,patient_has_ssuD) %>% pivot_wider(names_from = "patient_has_ssuD", values_from = "n") %>% 
+  data.matrix()
+mat_ssuD
+
+# the data
+# mat_ssuD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ssuD[,c(2, 3)])
+```
+
+```{r ssuD_b}
+dat_ssuD <- dat %>% select(genome_name,sample_name, sgb_id, ssuD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ssuD$ssuD <- as.numeric(dat_ssuD$ssuD) - 1
+dat_ssuD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ssuD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ssuD <- dat_ssuD %>% 
+  count(sample_name, ssuD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ssuD", values_from = "n") %>% 
+  mutate(patient_has_ssuD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ssuD <- prop_patient_ssuD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ssuD)
+
+# Change to data matrix for chisq test.
+mat_ssuD <- binarized_ssuD %>% count(DiseaseBinarized,patient_has_ssuD) %>% pivot_wider(names_from = "patient_has_ssuD", values_from = "n") %>% 
+  data.matrix()
+mat_ssuD
+
+# the data
+# mat_ssuD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ssuD[,c(2, 3)])
+```
+
+```{r lcd}
+dat_lcd <- dat %>% select(genome_name,sample_name, sgb_id, lcd, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_lcd$lcd <- as.numeric(dat_lcd$lcd) - 1
+dat_lcd$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_lcd$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_lcd <- dat_lcd %>% 
+  count(sample_name, lcd, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "lcd", values_from = "n") %>% 
+  mutate(patient_has_lcd = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_lcd <- prop_patient_lcd %>% 
+  select(sample_name, DiseaseBinarized, patient_has_lcd)
+
+# Change to data matrix for chisq test.
+mat_lcd <- binarized_lcd %>% count(DiseaseBinarized,patient_has_lcd) %>% pivot_wider(names_from = "patient_has_lcd", values_from = "n") %>% 
+  data.matrix()
+mat_lcd
+
+# the data
+# mat_lcd[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_lcd[,c(2, 3)])
+```
+
+
+
+```{r metK}
+dat_metK <- dat %>% select(genome_name,sample_name, sgb_id, metK, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_metK$metK <- as.numeric(dat_metK$metK) - 1
+dat_metK$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_metK$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_metK <- dat_metK %>% 
+  count(sample_name, metK, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "metK", values_from = "n") %>% 
+  mutate(patient_has_metK = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_metK <- prop_patient_metK %>% 
+  select(sample_name, DiseaseBinarized, patient_has_metK)
+
+# Change to data matrix for chisq test.
+mat_metK <- binarized_metK %>% count(DiseaseBinarized,patient_has_metK) %>% pivot_wider(names_from = "patient_has_metK", values_from = "n") %>% 
+  data.matrix()
+mat_metK
+
+# the data
+# mat_metK[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_metK[,c(2, 3)])
+```
+```{r metH}
+dat_metH <- dat %>% select(genome_name,sample_name, sgb_id, metH, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_metH$metH <- as.numeric(dat_metH$metH) - 1
+dat_metH$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_metH$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_metH <- dat_metH %>% 
+  count(sample_name, metH, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "metH", values_from = "n") %>% 
+  mutate(patient_has_metH = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_metH <- prop_patient_metH %>% 
+  select(sample_name, DiseaseBinarized, patient_has_metH)
+
+# Change to data matrix for chisq test.
+mat_metH <- binarized_metH %>% count(DiseaseBinarized,patient_has_metH) %>% pivot_wider(names_from = "patient_has_metH", values_from = "n") %>% 
+  data.matrix()
+mat_metH
+
+# the data
+# mat_metH[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_metH[,c(2, 3)])
+
+```
+
+```{r metE}
+dat_metE <- dat %>% select(genome_name,sample_name, sgb_id, metE, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_metE$metE <- as.numeric(dat_metE$metE) - 1
+dat_metE$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_metE$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_metE <- dat_metE %>% 
+  count(sample_name, metE, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "metE", values_from = "n") %>% 
+  mutate(patient_has_metE = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_metE <- prop_patient_metE %>% 
+  select(sample_name, DiseaseBinarized, patient_has_metE)
+
+# Change to data matrix for chisq test.
+mat_metE <- binarized_metE %>% count(DiseaseBinarized,patient_has_metE) %>% pivot_wider(names_from = "patient_has_metE", values_from = "n") %>% 
+  data.matrix()
+mat_metE
+
+# the data
+# mat_metE[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_metE[,c(2, 3)])
+
+```
+
+```{r metB}
+dat_metB <- dat %>% select(genome_name,sample_name, sgb_id, metB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_metB$metB <- as.numeric(dat_metB$metB) - 1
+dat_metB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_metB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_metB <- dat_metB %>% 
+  count(sample_name, metB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "metB", values_from = "n") %>% 
+  mutate(patient_has_metB = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_metB <- prop_patient_metB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_metB)
+
+# Change to data matrix for chisq test.
+mat_metB <- binarized_metB %>% count(DiseaseBinarized,patient_has_metB) %>% pivot_wider(names_from = "patient_has_metB", values_from = "n") %>% 
+  data.matrix()
+mat_metB
+
+# the data
+# mat_metB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_metB[,c(2, 3)])
+
+```
+
+```{r luxS}
+dat_luxS <- dat %>% select(genome_name,sample_name, sgb_id, luxS, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_luxS$luxS <- as.numeric(dat_luxS$luxS) - 1
+dat_luxS$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_luxS$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_luxS <- dat_luxS %>% 
+  count(sample_name, luxS, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "luxS", values_from = "n") %>% 
+  mutate(patient_has_luxS = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_luxS <- prop_patient_luxS %>% 
+  select(sample_name, DiseaseBinarized, patient_has_luxS)
+
+# Change to data matrix for chisq test.
+mat_luxS <- binarized_luxS %>% count(DiseaseBinarized,patient_has_luxS) %>% pivot_wider(names_from = "patient_has_luxS", values_from = "n") %>% 
+  data.matrix()
+mat_luxS
+
+# the data
+# mat_luxS[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_luxS[,c(2, 3)])
+
+```
+
+
+```{r dcm}
+dat_dcm <- dat %>% select(genome_name,sample_name, sgb_id, dcm, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_dcm$dcm <- as.numeric(dat_dcm$dcm) - 1
+dat_dcm$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_dcm$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_dcm <- dat_dcm %>% 
+  count(sample_name, dcm, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "dcm", values_from = "n") %>% 
+  mutate(patient_has_dcm = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_dcm <- prop_patient_dcm %>% 
+  select(sample_name, DiseaseBinarized, patient_has_dcm)
+
+# Change to data matrix for chisq test.
+mat_dcm <- binarized_dcm %>% count(DiseaseBinarized,patient_has_dcm) %>% pivot_wider(names_from = "patient_has_dcm", values_from = "n") %>% 
+  data.matrix()
+mat_dcm
+
+# the data
+# mat_dcm[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_dcm[,c(2, 3)])
+
+```
+
+```{r cysJ}
+dat_cysJ <- dat %>% select(genome_name,sample_name, sgb_id, cysJ, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_cysJ$cysJ <- as.numeric(dat_cysJ$cysJ) - 1
+dat_cysJ$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_cysJ$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_cysJ <- dat_cysJ %>% 
+  count(sample_name, cysJ, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "cysJ", values_from = "n") %>% 
+  mutate(patient_has_cysJ = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_cysJ <- prop_patient_cysJ %>% 
+  select(sample_name, DiseaseBinarized, patient_has_cysJ)
+
+# Change to data matrix for chisq test.
+mat_cysJ <- binarized_cysJ %>% count(DiseaseBinarized,patient_has_cysJ) %>% pivot_wider(names_from = "patient_has_cysJ", values_from = "n") %>% 
+  data.matrix()
+mat_cysJ
+
+# the data
+# mat_cysJ[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_cysJ[,c(2, 3)])
+
+```
+
+```{r bsh}
+dat_bsh <- dat %>% select(genome_name,sample_name, sgb_id, bsh, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_bsh$bsh <- as.numeric(dat_bsh$bsh) - 1
+dat_bsh$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_bsh$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_bsh <- dat_bsh %>% 
+  count(sample_name, bsh, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "bsh", values_from = "n") %>% 
+  mutate(patient_has_bsh = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_bsh <- prop_patient_bsh %>% 
+  select(sample_name, DiseaseBinarized, patient_has_bsh)
+
+# Change to data matrix for chisq test.
+mat_bsh <- binarized_bsh %>% count(DiseaseBinarized,patient_has_bsh) %>% pivot_wider(names_from = "patient_has_bsh", values_from = "n") %>% 
+  data.matrix()
+mat_bsh
+
+# the data
+# mat_bsh[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_bsh[,c(2, 3)])
+
+```
+
+```{r ahcY}
+dat_ahcY <- dat %>% select(genome_name,sample_name, sgb_id, ahcY, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ahcY$ahcY <- as.numeric(dat_ahcY$ahcY) - 1
+dat_ahcY$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ahcY$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ahcY <- dat_ahcY %>% 
+  count(sample_name, ahcY, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ahcY", values_from = "n") %>% 
+  mutate(patient_has_ahcY = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ahcY <- prop_patient_ahcY %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ahcY)
+
+# Change to data matrix for chisq test.
+mat_ahcY <- binarized_ahcY %>% count(DiseaseBinarized,patient_has_ahcY) %>% pivot_wider(names_from = "patient_has_ahcY", values_from = "n") %>% 
+  data.matrix()
+mat_ahcY
+
+# the data
+# mat_ahcY[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ahcY[,c(2, 3)])
+
+```
+
+
+
+```{r sarD}
+dat_sarD <- dat %>% select(genome_name,sample_name, sgb_id, sarD, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_sarD$sarD <- as.numeric(dat_sarD$sarD) - 1
+dat_sarD$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_sarD$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_sarD <- dat_sarD %>% 
+  count(sample_name, sarD, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "sarD", values_from = "n") %>% 
+  mutate(patient_has_sarD = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_sarD <- prop_patient_sarD %>% 
+  select(sample_name, DiseaseBinarized, patient_has_sarD)
+
+# Change to data matrix for chisq test.
+mat_sarD <- binarized_sarD %>% count(DiseaseBinarized,patient_has_sarD) %>% pivot_wider(names_from = "patient_has_sarD", values_from = "n") %>% 
+  data.matrix()
+mat_sarD
+
+# the data
+# mat_sarD[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_sarD[,c(2, 3)])
+
+```
+
+
+
+
+```{r islA}
+dat_islA <- dat %>% select(genome_name,sample_name, sgb_id, islA, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_islA$islA <- as.numeric(dat_islA$islA) - 1
+dat_islA$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_islA$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_islA <- dat_islA %>% 
+  count(sample_name, islA, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "islA", values_from = "n") %>% 
+  mutate(patient_has_islA = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_islA <- prop_patient_islA %>% 
+  select(sample_name, DiseaseBinarized, patient_has_islA)
+
+# Change to data matrix for chisq test.
+mat_islA <- binarized_islA %>% count(DiseaseBinarized,patient_has_islA) %>% pivot_wider(names_from = "patient_has_islA", values_from = "n") %>% 
+  data.matrix()
+mat_islA
+
+# the data
+# mat_islA[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_islA[,c(2, 3)])
+
+```
+
+
+
+```{r islB}
+dat_islB <- dat %>% select(genome_name,sample_name, sgb_id, islB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_islB$islB <- as.numeric(dat_islB$islB) - 1
+dat_islB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_islB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_islB <- dat_islB %>% 
+  count(sample_name, islB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "islB", values_from = "n") %>% 
+  mutate(patient_has_islB = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_islB <- prop_patient_islB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_islB)
+
+# Change to data matrix for chisq test.
+mat_islB <- binarized_islB %>% count(DiseaseBinarized,patient_has_islB) %>% pivot_wider(names_from = "patient_has_islB", values_from = "n") %>% 
+  data.matrix()
+mat_islB
+
+# the data
+# mat_islB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_islB[,c(2, 3)])
+
+```
+```{r mccB}
+dat_CBS <- dat %>% select(genome_name,sample_name, sgb_id, CBS, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_CBS$CBS <- as.numeric(dat_CBS$CBS) - 1
+dat_CBS$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_CBS$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_CBS <- dat_CBS %>% 
+  count(sample_name, CBS, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "CBS", values_from = "n") %>% 
+  mutate(patient_has_CBS = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_CBS <- prop_patient_CBS %>% 
+  select(sample_name, DiseaseBinarized, patient_has_CBS)
+
+# Change to data matrix for chisq test.
+mat_CBS <- binarized_CBS %>% count(DiseaseBinarized,patient_has_CBS) %>% pivot_wider(names_from = "patient_has_CBS", values_from = "n") %>% 
+  data.matrix()
+mat_CBS
+
+# the data
+# mat_CBS[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_CBS[,c(2, 3)])
+
+```
+```{r mccB}
+dat_mccB <- dat %>% select(genome_name,sample_name, sgb_id, mccB, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_mccB$mccB <- as.numeric(dat_mccB$mccB) - 1
+dat_mccB$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_mccB$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_mccB <- dat_mccB %>% 
+  count(sample_name, mccB, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "mccB", values_from = "n") %>% 
+  mutate(patient_has_mccB = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_mccB <- prop_patient_mccB %>% 
+  select(sample_name, DiseaseBinarized, patient_has_mccB)
+
+# Change to data matrix for chisq test.
+mat_mccB <- binarized_mccB %>% count(DiseaseBinarized,patient_has_mccB) %>% pivot_wider(names_from = "patient_has_mccB", values_from = "n") %>% 
+  data.matrix()
+mat_mccB
+
+# the data
+# mat_mccB[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_mccB[,c(2, 3)])
+
+```
+
+
+```{r CTH}
+dat_CTH <- dat %>% select(genome_name,sample_name, sgb_id, CTH, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_CTH$CTH <- as.numeric(dat_CTH$CTH) - 1
+dat_CTH$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_CTH$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_CTH <- dat_CTH %>% 
+  count(sample_name, CTH, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "CTH", values_from = "n") %>% 
+  mutate(patient_has_CTH = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_CTH <- prop_patient_CTH %>% 
+  select(sample_name, DiseaseBinarized, patient_has_CTH)
+
+# Change to data matrix for chisq test.
+mat_CTH <- binarized_CTH %>% count(DiseaseBinarized,patient_has_CTH) %>% pivot_wider(names_from = "patient_has_CTH", values_from = "n") %>% 
+  data.matrix()
+mat_CTH
+
+# the data
+# mat_CTH[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_CTH[,c(2, 3)])
+
+```
+```{r ThreeMST}
+dat_ThreeMST <- dat %>% select(genome_name,sample_name, sgb_id, ThreeMST, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_ThreeMST$ThreeMST <- as.numeric(dat_ThreeMST$ThreeMST) - 1
+dat_ThreeMST$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_ThreeMST$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_ThreeMST <- dat_ThreeMST %>% 
+  count(sample_name, ThreeMST, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "ThreeMST", values_from = "n") %>% 
+  mutate(patient_has_ThreeMST = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_ThreeMST <- prop_patient_ThreeMST %>% 
+  select(sample_name, DiseaseBinarized, patient_has_ThreeMST)
+
+# Change to data matrix for chisq test.
+mat_ThreeMST <- binarized_ThreeMST %>% count(DiseaseBinarized,patient_has_ThreeMST) %>% pivot_wider(names_from = "patient_has_ThreeMST", values_from = "n") %>% 
+  data.matrix()
+mat_ThreeMST
+
+# the data
+# mat_ThreeMST[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_ThreeMST[,c(2, 3)])
+
+```
+```{r iscS}
+dat_iscS <- dat %>% select(genome_name,sample_name, sgb_id, iscS, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_iscS$iscS <- as.numeric(dat_iscS$iscS) - 1
+dat_iscS$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_iscS$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_iscS <- dat_iscS %>% 
+  count(sample_name, iscS, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "iscS", values_from = "n") %>% 
+  mutate(patient_has_iscS = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_iscS <- prop_patient_iscS %>% 
+  select(sample_name, DiseaseBinarized, patient_has_iscS)
+
+# Change to data matrix for chisq test.
+mat_iscS <- binarized_iscS %>% count(DiseaseBinarized,patient_has_iscS) %>% pivot_wider(names_from = "patient_has_iscS", values_from = "n") %>% 
+  data.matrix()
+mat_iscS
+
+# the data
+# mat_iscS[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_iscS[,c(2, 3)])
+
+```
+```{r cdl}
+dat_cdl <- dat %>% select(genome_name,sample_name, sgb_id, cdl, Disease_Summary)
+
+# Recode disease summary and gene presense
+dat_cdl$cdl <- as.numeric(dat_cdl$cdl) - 1
+dat_cdl$DiseaseBinarized <- c(1, 2, 0)[as.numeric(dat_cdl$Disease_Summary)]
+
+# gives proportion of genomes from patient with asrA present
+prop_patient_cdl <- dat_cdl %>% 
+  count(sample_name, cdl, DiseaseBinarized) %>% 
+  pivot_wider(names_from = "cdl", values_from = "n") %>% 
+  mutate(patient_has_cdl = !is.na(`1`))
+
+
+#  binarizeds patient gene presence
+binarized_cdl <- prop_patient_cdl %>% 
+  select(sample_name, DiseaseBinarized, patient_has_cdl)
+
+# Change to data matrix for chisq test.
+mat_cdl <- binarized_cdl %>% count(DiseaseBinarized,patient_has_cdl) %>% pivot_wider(names_from = "patient_has_cdl", values_from = "n") %>% 
+  data.matrix()
+mat_cdl
+
+# the data
+# mat_cdl[,c(2,3)]
+
+# chisq test of independence
+chisq.test(mat_cdl[,c(2, 3)])
+
+```
+
+
+## BH - P-value correction before most recent addition of HMMs in Feb 2021
+### Need to add balues starting at metK
+```{r}
+
+gene<-c("dsrA", "dsrB", "dsrC", "dsrD", "dsrJ", "dsrK", "dsrM", "dsrO", "dsrP", "dsrT", "asrA", "asrB", "asrC", "phsA", "phsA_K08352", "phsC", "sdo", "sqr", "tpa", "dcyD", "sufS", "metC", "cysM", "cysK", "tauD", "xsc"," malY", "toa", "SufS", "isfD", "mgl", "ttrA", "ttrB", "ttrC", "dmoA", "dmsA", "dmsB_K00184", "dmsB_K07307", "dmsC_K00185", "dmsC_K07308", "dmsR", "doxA", "doxD", "megL", "sfnG", "ssuD", "lcd")
+uncorrected_pvalue <- c(0.03637, 0.04668, 4.45E-05, 0.03375, 0.1101, 0.08777, 0.04, 0.04846, 0.1185, 0.01272, 0.002657, 0.001429, 0.03504, 0.06864, 0.3907, 0.03182, 0.001149, 7.54E-07, 0.1056, 5.31E-06, 0.0227, 0.06759, 2.80E-06, 0.3244, 0.2668, "NA", 0.03958, "NA", 0.0227, 0.3202, 0.001168, 0.8184, 0.6607, 0.9556, 0.5958, 0.3486, 0.3843, 0.9223, 0.4734, 0.3763, "NA", 0.1897, 0.5299, 0.0001718, "NA", 0.07329, 0.01691)
+
+df<- data.frame(gene, uncorrected_pvalue)
+print(df)
+
+uncorrected_pvalue_removedNA <- c(0.0349, 0.0449, 4.45E-05, 0.03232, 0.1061, 0.08441, 0.03832, 0.04674, 0.1156, 0.01206, 0.002418, 0.001286, 0.03242, 0.06848, 0.3982, 0.03057, 0.001491, 7.22E-07, 0.1087, 4.95E-06, 0.02239, 0.06799, 2.55E-06, 0.3416, 0.2608, 0.03911, 0.02239, 0.3168, 0.001057, 0.8223, 0.6636, 0.9557, 0.5901, 0.3578, 0.4073, 0.9365, 0.4671, 0.3637, 0.1875, 0.5257, 0.0001545, 0.07056, 0.03206, 0.005914, 0.03073, 0.01167, 0.271, 0.0202, 0.1023, 0.003248, 0.08048, 0.05158, 0.03851, 0.02262, 0.3353, 0.247, 0.0001306)
+
+gene_noNA<-c("dsrA", "dsrB", "dsrC", "dsrD", "dsrJ", "dsrK", "dsrM", "dsrO", "dsrP", "dsrT", "asrA", "asrB", "asrC", "phsA", "phsA_K08352", "phsC", "sdo", "sqr", "tpa", "dcyD", "sufS", "metC", "cysM", "cysK", "tauD", "malY", "SufS", "isfD", "mgl", "ttrA", "ttrB", "ttrC", "dmoA", "dmsA", "dmsB_K00184", "dmsB_K07307", "dmsC_K00185", "dmsC_K07308","doxA", "doxD", "megL","ssuD", "lcd", "metH", "metE", "metB", "luxS", "dcm", "cysJ", "bsh", "ahcY", "sarD", "islA", "islB", "CBS", "CTH", "3MST")
+
+```
+
+
+```{r}
+
+set.seed(123)
+x <- rnorm(50, mean = c(rep(0, 25), rep(3, 25)))
+p <- 2*pnorm(sort(-abs(x)))
+round(p, 3)
+round(p.adjust(p), 3)
+round(p.adjust(p, "BH"), 3)
+print(p)
+
+print(df$uncorrected_pvalue)
+round(p.adjust(df$uncorrected_pvalue, "BH"), 3)
+
+corrected_pvalues<-p.adjust(uncorrected_pvalue_removedNA, "BH")
+print(corrected_pvalues)
+
+corrected_pvalues_genes_combined <- cbind(gene_noNA, corrected_pvalues)
+print(corrected_pvalues_genes_combined)
+
+corrected_pvalues.df <-data.frame(corrected_pvalues)
+print(corrected_pvalues.df)
+
+corrected_pvalues_bonferroni<-p.adjust(uncorrected_pvalue_removedNA, "bonferroni")
+print(corrected_pvalues_bonferroni)
+```
+
+## Find total number of patients with each disease state to be able to normalize the binarized data 
+
+```{r ahcY}
+dat_diseasesumm <- dat %>% select(genome_name,sample_name, sgb_id, study, Disease_Summary)
+
+aggregate(data.frame(count = x),       # Apply aggregate function
+          list(value = x),
+          length)
+
+
+disease_count <- dat_diseasesumm %>%                              # Applying group_by & summarise
+  group_by(Disease_Summary) %>%
+  summarise(count = n_distinct(sample_name))
+disease_count
+
+
+
+unique_samples  <- dat_diseasesumm %>%                              # Applying group_by & summarise
+  summarise(count = n_distinct(sample_name))
+unique_samples
+
+
+
+```
+
+
+

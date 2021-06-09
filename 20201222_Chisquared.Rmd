@@ -1,6 +1,6 @@
 ---
 title: "sulfur"
-author: "Michael Liou"
+author: "Elise Cowley, Michael Liou"
 date: "12/21/2020"
 output:
   pdf_document: default

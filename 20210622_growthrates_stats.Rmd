@@ -1,0 +1,288 @@
+---
+title: "20210622_growthrates_stats"
+output: pdf_document
+author:"Elise Cowley"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(skimr)
+library(ggplot2)
+```
+
+```{r}
+growthrates<- read.csv("/Users/elisescowley2/Documents/AnantharamanLab/CRC/GrowthRates_AllData.csv")
+colnames(growthrates)
+```
+
+```{r}
+Dpiger_CRC_Healthy <- filter(growthrates,closest_species=="Desulfovibrio piger", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Dpiger_CRC_Healthy)
+```
+
+```{r}
+Fmoriferum_CRC_Healthy <- filter(growthrates,closest_species=="Fusobacterium mortiferum", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(Fmoriferum_CRC_Healthy$un_filtered_index_of_replication_irep., Fmoriferum_CRC_Healthy$Disease_Summary, data = Fmoriferum_CRC_Healthy)
+```
+
+```{r}
+Fulcerans_CRC_Healthy <- filter(growthrates,closest_species=="Fusobacterium ulcerans", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(Fulcerans_CRC_Healthy$un_filtered_index_of_replication_irep, Fulcerans_CRC_Healthy$Disease_Summary, data = Fulcerans_CRC_Healthy)
+```
+
+```{r}
+Bfragilis_CRC_Healthy <- filter(growthrates,closest_species=="Bacteroides fragilis", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(Bfragilis_CRC_Healthy$un_filtered_index_of_replication_irep ~ Bfragilis_CRC_Healthy$Disease_Summary, data = Bfragilis_CRC_Healthy)
+```
+
+```{r}
+Ecoli_CRC_Healthy <- filter(growthrates,closest_species=="Escherichia coli", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ecoli_CRC_Healthy)
+```
+
+```{r}
+Ppiscolens_CRC_Healthy <- filter(growthrates,closest_species=="Pyramidobacter piscolens", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ppiscolens_CRC_Healthy)
+```
+
+```{r}
+Pasaccharolytica_CRC_Healthy <- filter(growthrates,closest_species=="Porphyromonas asaccharolytica", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pasaccharolytica_CRC_Healthy)
+```
+
+```{r}
+Pstomatis_CRC_Healthy <- filter(growthrates,closest_species=="Peptostreptococcus stomatis", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pstomatis_CRC_Healthy)
+```
+
+```{r}
+Bwadsworthia_CRC_Healthy <- filter(growthrates,closest_species=="Bilophila wadsworthia", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bwadsworthia_CRC_Healthy)
+```
+
+```{r}
+Osplanchnicus_CRC_Healthy <- filter(growthrates,closest_species=="Odoribacter splanchnicus", Disease_Summary  %in% c("CRC", "none"))
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Osplanchnicus_CRC_Healthy)
+```
+
+
+
+## Feng Study
+```{r}
+Dpiger_Feng <- filter(growthrates,closest_species=="Desulfovibrio piger", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Dpiger_Feng)
+```
+
+```{r}
+Fmoriferum_Feng <- filter(growthrates,closest_species=="Fusobacterium mortiferum", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fmoriferum_Feng)
+```
+```{r}
+Fulcerans_Feng <- filter(growthrates,closest_species=="Fusobacterium ulcerans", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fulcerans_Feng)
+```
+
+
+```{r}
+Bfragilis_Feng <- filter(growthrates,closest_species=="Bacteroides fragilis", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bfragilis_Feng)
+```
+```{r}
+Ecoli_Feng <- filter(growthrates,closest_species=="Escherichia coli", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ecoli_Feng)
+```
+
+```{r}
+Ppiscolens_Feng <- filter(growthrates,closest_species=="Pyramidobacter piscolens", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ppiscolens_Feng)
+```
+
+```{r}
+Pasaccharolytica_Feng <- filter(growthrates,closest_species=="Porphyromonas asaccharolytica", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pasaccharolytica_Feng)
+```
+
+```{r}
+Pstomatis_Feng <- filter(growthrates,closest_species=="Peptostreptococcus stomatis", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pstomatis_Feng)
+```
+
+
+```{r}
+Bwadsworthia_Feng <- filter(growthrates,closest_species=="Bilophila wadsworthia", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bwadsworthia_Feng)
+```
+
+```{r}
+Osplanchnicus_Feng <- filter(growthrates,closest_species=="Odoribacter splanchnicus", Study=="FengQ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Osplanchnicus_Feng)
+```
+
+
+## Yu Study
+```{r}
+Dpiger_Yu <- filter(growthrates,closest_species=="Desulfovibrio piger", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Dpiger_Yu)
+```
+
+```{r}
+Fmoriferum_Yu <- filter(growthrates,closest_species=="Fusobacterium mortiferum", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fmoriferum_Yu)
+```
+
+```{r}
+Fulcerans_Yu <- filter(growthrates,closest_species=="Fusobacterium ulcerans", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fulcerans_Yu)
+```
+
+
+```{r}
+Bfragilis_Yu <- filter(growthrates,closest_species=="Bacteroides fragilis", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bfragilis_Yu)
+```
+
+
+```{r}
+Ecoli_Yu <- filter(growthrates,closest_species=="Escherichia coli", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ecoli_Yu)
+```
+
+```{r}
+Ppiscolens_Yu <- filter(growthrates,closest_species=="Pyramidobacter piscolens", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ppiscolens_Yu)
+```
+
+
+
+```{r}
+Pasaccharolytica_Yu <- filter(growthrates,closest_species=="Porphyromonas asaccharolytica", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pasaccharolytica_Yu)
+```
+
+```{r}
+Pstomatis_Yu <- filter(growthrates,closest_species=="Peptostreptococcus stomatis", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pstomatis_Yu)
+```
+
+```{r}
+Bwadsworthia_Yu <- filter(growthrates,closest_species=="Bilophila wadsworthia", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bwadsworthia_Yu)
+```
+
+```{r}
+Osplanchnicus_Yu <- filter(growthrates,closest_species=="Odoribacter splanchnicus", Study=="YuJ_2015")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Osplanchnicus_Yu)
+```
+
+
+
+## Hannigan Study
+```{r}
+Dpiger_Hannigan <- filter(growthrates,closest_species=="Desulfovibrio piger", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Dpiger_Hannigan)
+```
+
+```{r}
+Fmoriferum_Hannigan <- filter(growthrates,closest_species=="Fusobacterium mortiferum", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fmoriferum_Hannigan)
+```
+
+```{r}
+Fulcerans_Hannigan <- filter(growthrates,closest_species=="Fusobacterium ulcerans", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fulcerans_Hannigan)
+```
+
+
+```{r}
+Bfragilis_Hannigan <- filter(growthrates,closest_species=="Bacteroides fragilis", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bfragilis_Hannigan)
+```
+
+
+```{r}
+Ecoli_Hannigan <- filter(growthrates,closest_species=="Escherichia coli", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ecoli_Hannigan)
+```
+
+```{r}
+Ppiscolens_Hannigan <- filter(growthrates,closest_species=="Pyramidobacter piscolens", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ppiscolens_Hannigan)
+```
+
+
+
+```{r}
+Pasaccharolytica_Hannigan <- filter(growthrates,closest_species=="Porphyromonas asaccharolytica", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pasaccharolytica_Hannigan)
+```
+
+```{r}
+Pstomatis_Hannigan <- filter(growthrates,closest_species=="Peptostreptococcus stomatis", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pstomatis_Hannigan)
+```
+
+```{r}
+Bwadsworthia_Hannigan <- filter(growthrates,closest_species=="Bilophila wadsworthia", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bwadsworthia_Hannigan)
+```
+
+```{r}
+Osplanchnicus_Hannigan <- filter(growthrates,closest_species=="Odoribacter splanchnicus", Study=="HanniganGD_2017")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Osplanchnicus_Hannigan)
+```
+
+
+## Zeller Study
+```{r}
+Dpiger_Zeller <- filter(growthrates,closest_species=="Desulfovibrio piger", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Dpiger_Zeller)
+```
+
+```{r}
+Fmoriferum_Zeller <- filter(growthrates,closest_species=="Fusobacterium mortiferum", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fmoriferum_Zeller)
+```
+
+```{r}
+Fulcerans_Zeller <- filter(growthrates,closest_species=="Fusobacterium ulcerans", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Fulcerans_Zeller)
+```
+
+
+```{r}
+Bfragilis_Zeller <- filter(growthrates,closest_species=="Bacteroides fragilis", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bfragilis_Zeller)
+```
+
+
+```{r}
+Ecoli_Zeller <- filter(growthrates,closest_species=="Escherichia coli", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ecoli_Zeller)
+```
+
+```{r}
+Ppiscolens_Zeller <- filter(growthrates,closest_species=="Pyramidobacter piscolens", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Ppiscolens_Zeller)
+```
+
+```{r}
+Pasaccharolytica_Zeller <- filter(growthrates,closest_species=="Porphyromonas asaccharolytica", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pasaccharolytica_Zeller)
+```
+
+```{r}
+Pstomatis_Zeller <- filter(growthrates,closest_species=="Peptostreptococcus stomatis", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Pstomatis_Zeller)
+```
+
+```{r}
+Bwadsworthia_Zeller <- filter(growthrates,closest_species=="Bilophila wadsworthia", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Bwadsworthia_Zeller)
+```
+
+```{r}
+Osplanchnicus_Zeller <- filter(growthrates,closest_species=="Odoribacter splanchnicus", Study=="ZellerG_2014")
+kruskal.test(un_filtered_index_of_replication_irep ~ Disease_Summary, data = Osplanchnicus_Zeller)
+```

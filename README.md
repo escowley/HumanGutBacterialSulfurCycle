@@ -1,2 +1,2 @@
-# HumanGutBacterialSulfurCycle
+# Human Gut Bacterial Sulfur Cycle
 Code and HMM profiles for the following manuscript: Patricia G. Wolf, Elise S. Cowley, Adam Breister, Sarah Matatov, Luke Lucio, Paige Polak, Jason M. Ridlon, H. Rex Gaskins, Karthik Anantharaman Diversity and distribution of sulfur metabolic genes in the human gut microbiome and their association with colorectal cancer. 2022. Microbiome. Currently available at Research Square [https://doi.org/10.21203/rs.3.rs-809984/v1] and biorxiv [https://www.biorxiv.org/content/10.1101/2021.07.01.450790v1]. 

@@ -1,0 +1,1 @@
+These are HMM profiles built from KEGG HMM profiles and trusted cutoffs to round out the human gut sulfur metabolism survey. They were compiled in January 2021 by Elise Cowley. 
